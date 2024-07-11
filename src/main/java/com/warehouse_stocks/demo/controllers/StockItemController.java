@@ -30,8 +30,8 @@ public class StockItemController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdDTO);
     }
 
-    @PutMapping
-    public ResponseEntity<StockItemDTO> updateStockItem(@RequestBody StockIdDTO stockItemIdDTO, String location, Integer qty) {
+    @PutMapping("/{location}/{qty}")
+    public ResponseEntity<StockItemDTO> updateStockItem(@RequestBody StockIdDTO stockItemIdDTO, @PathVariable String location, @PathVariable Integer qty) {
 
         StockItem createdStockItem = stockItemService.updateStockItem(stockItemIdDTO.getArticle().getName(), stockItemIdDTO.getLocation(), location, qty);
         StockItemDTO createdDTO = modelMapper.map(createdStockItem, StockItemDTO.class);

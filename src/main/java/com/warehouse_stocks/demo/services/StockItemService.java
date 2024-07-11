@@ -7,7 +7,7 @@ import com.warehouse_stocks.demo.entities.Article;
 import com.warehouse_stocks.demo.entities.StockID;
 import com.warehouse_stocks.demo.repositories.StockItemRepository;
 import com.warehouse_stocks.demo.entities.StockItem;
-import com.warehouse_stocks.demo.repositories.ArticleRepository;
+import com.warehouse_stocks.demo.repositories.ArticleRepository1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +17,10 @@ public class StockItemService {
     private StockItemRepository stockItemRepository;
 
     @Autowired
-    private ArticleRepository articleRepository;
+    private ArticleRepository1 articleRepository1;
 
     public StockItem createStockItem(Integer qty, String name, String location) {
-        Article article = articleRepository.findByName(name).orElseThrow(
+        Article article = articleRepository1.findByName(name).orElseThrow(
                 () -> new RuntimeException("Article not found"));
         StockID stockID = new StockID(article, location);
         Optional<StockItem> foundItemOpt = stockItemRepository.findById(stockID);
@@ -33,7 +33,7 @@ public class StockItemService {
     }
 
     public void deleteStockItem(String name, String location) {
-        Article article = articleRepository.findByName(name).orElseThrow(
+        Article article = articleRepository1.findByName(name).orElseThrow(
                 () -> new RuntimeException("Article not found"));
         StockID stockID = new StockID(article, location);
         StockItem foundItem = stockItemRepository.findById(stockID).orElseThrow(()
@@ -42,7 +42,7 @@ public class StockItemService {
     }
 
     public StockItem updateStockItem(String articleName, String locationOld, String locationNew, Integer qty){
-        Article article = articleRepository.findByName(articleName).orElseThrow(
+        Article article = articleRepository1.findByName(articleName).orElseThrow(
                 () -> new RuntimeException("Article not found"));
         StockID stockID = new StockID(article, locationOld);
         StockItem foundItem = stockItemRepository.findById(stockID).orElseThrow(()

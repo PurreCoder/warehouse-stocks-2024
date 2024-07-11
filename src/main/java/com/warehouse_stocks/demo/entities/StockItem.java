@@ -3,16 +3,17 @@ package com.warehouse_stocks.demo.entities;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @AllArgsConstructor
 public class StockItem {
     @EmbeddedId
-    StockID stockId;
-    Integer quantity;
+    private StockID stockId;
+    private Integer quantity;
 }
